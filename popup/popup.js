@@ -1,5 +1,9 @@
 //geet cookies on page load
 document.addEventListener("DOMContentLoaded", () => {
+  browser.tabs.query({active: true, currentWindow: true}), function(tabs) {
+    var activeTab = tabs[0];
+    browser.tabs.sendMessage(activeTab.id, {action: "fetchLocalStorage"});
+  }
     const cookie_number = document.getElementById("cookies");
     browser.cookies.getAll({}).then((cookies) => {
         cookie_number.textContent = "Cookies: " + cookies.length;
@@ -35,4 +39,9 @@ browser.runtime.onMessage.addListener(function(message) {
     if (message.action === "exibirMensagem") {
         atualizarMensagem(message.mensagem);
     }
+    if (message.type === "getLocalStorage") {
+        document.getElementById("localStorage").textContent = message.data;
+    }
 });
+
+
