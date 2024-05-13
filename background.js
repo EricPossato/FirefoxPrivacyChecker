@@ -56,11 +56,11 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 
 
-// Função para verificar se o navegador foi redirecionado para uma URL não autorizada
+// Função para verificar se o navegador foi redirecionado para uma outra URL
 function verificarRedirecionamento(details) {
     if (details.statusCode === 301 || details.statusCode === 302) {
-        console.log("Redirecionamento detectado para:", details.redirectUrl);
-        exibirMensagem("O navegador foi redirecionado para uma URL não autorizada: " + details.redirectUrl);
+        console.log("Redirecionamento detectado para:", details.url);
+        exibirMensagem("O navegador foi redirecionado para a URL : " + details.url);
     }
 }
 
